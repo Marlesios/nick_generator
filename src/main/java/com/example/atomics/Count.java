@@ -1,96 +1,77 @@
 package com.example.atomics;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
-import java.util.Locale;
 import java.util.concurrent.atomic.AtomicInteger;
 
 
 public class Count {
-    AtomicInteger count = new AtomicInteger(0);
-    AtomicInteger equalName = new AtomicInteger(0);
-    AtomicInteger increasingByAlphabet = new AtomicInteger(0);
+    AtomicInteger countLengthQuantity = new AtomicInteger(0);
+    List<String> countLength = new ArrayList<>();
 
-    String sample;
-    List<String> five = new ArrayList<>();
-    List<String> sameNames = new ArrayList<>();
-    List<String> increasing = new ArrayList<>();
+    AtomicInteger equalNameQuantity = new AtomicInteger(0);
+    List<String> equalName = new ArrayList<>();
 
-    public void setCount(String[] text, int length) {
+    AtomicInteger increasingByAlphabetQuantity = new AtomicInteger(0);
+    List<String> increasingByALphabet = new ArrayList<>();
+
+    public void countLength(String[] text, int length) {
+
         for (String s : text) {
             if (s.length() == length) {
 //
-                sample = s;
+                String sample = s;
                 String reverseStr = "";
                 int strLength = s.length();
                 for (int j = (strLength - 1); j >= 0; --j) {
                     reverseStr = reverseStr + s.charAt(j);
                 }
                 if (s.toLowerCase().equals(reverseStr)) {
-                    count.addAndGet(1);
-                    five.add(s);
+                    countLengthQuantity.addAndGet(1);
+                    countLength.add(s);
                 }
 
             }
         }
-
-        System.out.printf("красивых слов состоящих из %s в количестве %s \n", length, count);
+        System.out.printf("красивых слов состоящих из %s в количестве %s \n", length, countLengthQuantity);
 
 
     }
 
-    public void sameName(String[] text) {
+    public void countEqualCharacterNames(String[] text) {
 
         for (String s : text) {
-
             char[] ch = s.toCharArray();
             String rev = "";
             for (int i = 0; i < ch.length; i++) {
-                if (ch[0]==ch[i]){
+                if (ch[0] == ch[i]) {
                     rev += ch[i];
                 }
-                if (rev.length() == s.length()){
-                    equalName.addAndGet(1);
-                    sameNames.add(s);
+                if (rev.length() == s.length()) {
+                    equalNameQuantity.addAndGet(1);
+                    equalName.add(s);
                 }
-
             }
         }
-
-        System.out.println("количество имен с одинаковыми буквами : " + equalName);
-        for (String s : sameNames) {
-            System.out.println(s);
-        }
-
+        System.out.println("количество имен с одинаковыми буквами : " + equalNameQuantity);
     }
 
-    public void increasingByAlphabet(String[] text){
+    public void countIncreasingByAlphabet(String[] text) {
         for (String s : text) {
             char[] ch = s.toCharArray();
             char rev = 0;
             byte b = 0;
             for (int i = 0; i < ch.length; i++) {
-                if (rev <=ch[i]){
+                if (rev <= ch[i]) {
                     rev = ch[i];
                     b++;
                 }
-                if (b == s.length()){
-                    increasingByAlphabet.addAndGet(1);
-                    increasing.add(s);
+                if (b == s.length()) {
+                    increasingByAlphabetQuantity.addAndGet(1);
+                    increasingByALphabet.add(s);
                 }
-
             }
         }
-        for(String s: increasing){
-            System.out.println(" этот " + s);
-        }
+        System.out.println("имен состоящий по возрастанию алфавита : " + increasingByAlphabetQuantity);
     }
-
-    public Integer getCount() {
-        return count.get();
-
-    }
-
-
 }
