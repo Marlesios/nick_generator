@@ -10,9 +10,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Count {
     AtomicInteger count = new AtomicInteger(0);
     AtomicInteger equalName = new AtomicInteger(0);
+    AtomicInteger increasingByAlphabet = new AtomicInteger(0);
+
     String sample;
     List<String> five = new ArrayList<>();
     List<String> sameNames = new ArrayList<>();
+    List<String> increasing = new ArrayList<>();
 
     public void setCount(String[] text, int length) {
         for (String s : text) {
@@ -60,6 +63,28 @@ public class Count {
             System.out.println(s);
         }
 
+    }
+
+    public void increasingByAlphabet(String[] text){
+        for (String s : text) {
+            char[] ch = s.toCharArray();
+            char rev = 0;
+            byte b = 0;
+            for (int i = 0; i < ch.length; i++) {
+                if (rev <=ch[i]){
+                    rev = ch[i];
+                    b++;
+                }
+                if (b == s.length()){
+                    increasingByAlphabet.addAndGet(1);
+                    increasing.add(s);
+                }
+
+            }
+        }
+        for(String s: increasing){
+            System.out.println(" этот " + s);
+        }
     }
 
     public Integer getCount() {
