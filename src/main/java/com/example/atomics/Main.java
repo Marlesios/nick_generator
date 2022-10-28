@@ -5,7 +5,7 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) throws InterruptedException {
         Random random = new Random();
-        String[] texts = new String[100];
+        String[] texts = new String[100_000];
         for (int i = 0; i < texts.length; i++) {
             texts[i] = generateText("abc", 4 + random.nextInt(3));
         }
@@ -21,9 +21,9 @@ public class Main {
        thread3.join();
         thread2.join();
       thread1.join();
-        for(String one: texts){
-            System.out.println("пример :"+one);
-        }
+//        for(String one: texts){
+//            System.out.println("пример :"+one);
+//        }
     }
     public static String generateText(String letters, int length) {
         Random random = new Random();

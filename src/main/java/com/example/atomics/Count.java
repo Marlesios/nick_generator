@@ -7,7 +7,6 @@ import java.util.Locale;
 import java.util.concurrent.atomic.AtomicInteger;
 
 
-
 public class Count {
     AtomicInteger count = new AtomicInteger(0);
     AtomicInteger equalName = new AtomicInteger(0);
@@ -37,28 +36,30 @@ public class Count {
 
 
     }
+
     public void sameName(String[] text) {
+
         for (String s : text) {
-            char[] current = s.toCharArray();
-            int count = 0;
-                for(int i= 0; i < current.length; i++){
-                    for(int j = i + 1; j < current.length; j++){
-                        char one = current[j];
-                        if(current[i] == one){
-                            count += 1;
-                        }
-                    }
+
+            char[] ch = s.toCharArray();
+            String rev = "";
+            for (int i = 0; i < ch.length; i++) {
+                if (ch[0]==ch[i]){
+                    rev += ch[i];
                 }
-                if(current.length  == count){
+                if (rev.length() == s.length()){
                     equalName.addAndGet(1);
                     sameNames.add(s);
                 }
+
+            }
         }
 
-        System.out.println("количество имен с одинаковыми буквами : "+equalName);
-        for(String s: sameNames){
+        System.out.println("количество имен с одинаковыми буквами : " + equalName);
+        for (String s : sameNames) {
             System.out.println(s);
         }
+
     }
 
     public Integer getCount() {
